@@ -1,8 +1,8 @@
 class Task:
-    def __init__(self, id, title, date_of_creation):
+    def __init__(self, id, title, creation_date):
         self.id = id
         self.title = title
-        self.date_of_creation = date_of_creation
+        self.creation_date = creation_date
         self.done = False
 
     def mark_as_done(self):
@@ -15,7 +15,7 @@ class Task:
         return {
             'id': self.id,
             'title': self.title,
-            'date_of_creation': self.date_of_creation,
+            'creation_date': self.creation_date,
             'done': self.done
         }
 
@@ -24,5 +24,5 @@ class Task:
         return cls(
             id=data.get('id'),
             title=data.get('title'),
-            date_of_creation=data.get('date_of_creation')
+            creation_date=data.get('creation_date')
         )
