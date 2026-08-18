@@ -1,0 +1,20 @@
+{
+    "tasks": [
+        {
+            "id": 1,
+            "title": "Finish project report",
+            "description": "Complete the final report for the project and submit it to the manager.",
+            "creation_date": "2024-06-15",
+            "priority": "High",
+            "status": "In Progress"
+        },
+        {
+            "id": 2,
+            "title": "Prepare presentation slides",
+            "description": "Create slides for the upcoming team meeting.",
+            "creation_date": "2024-06-20",
+            "priority": "Medium",
+            "status": "Not Started"
+        }
+    ]
+}
