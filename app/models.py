@@ -19,6 +19,7 @@ class Task:
             'done': self.done
         }
 
+    @classmethod
     def from_dict(cls, data):
         return cls(
             id=data.get('id'),
