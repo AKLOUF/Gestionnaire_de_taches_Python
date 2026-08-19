@@ -12,7 +12,7 @@ class TaskManager:
         task = Task(
             id=self.__generate_next_id(),
             title=title,
-            creation_date=datetime.today(),
+            creation_date=datetime.today().strftime("%d-%m-%Y"),
             priority=priority,
             description=description,
             status="not started"
@@ -49,10 +49,10 @@ class TaskManager:
             return True
         return False
 
-    def filter_tasks_by_done_status(self, done=None):
-        if done is None:
+    def filter_tasks_by_done_status(self, status):
+        if status is None:
             return self.tasks
-        return [task for task in self.tasks if task.done.lower() == done.lower()]
+        return [task for task in self.tasks if task.status == status]
 
     def filter_tasks_by_priority(self, priority):
         return [task for task in self.tasks if task.priority == priority]
