@@ -9,7 +9,7 @@ class TaskManager:
         return max([t.id for t in self.tasks], default=0) + 1
 
     def add_task(self, title, priority, description=None):
-        if title is "":
+        if title == "":
             raise ValueError("Task title cannot be empty.")
 
         task = Task(
