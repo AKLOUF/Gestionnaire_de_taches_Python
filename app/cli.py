@@ -34,13 +34,21 @@ def start_app():
         elif choice == '2':
             task_manager.display_tasks()
         elif choice == '3':
-            priority = input("Enter the priority to filter by (low / medium / high): ")
-            if priority.lower() not in ["low", "medium", "high"]:
+            priority = input("Enter the priority to filter by (1.low / 2.medium / 3.high): ")
+
+            if TaskPriority._priority_transform(priority):
+                priority = TaskPriority._priority_transform(priority).value
+            else:
                 print("Invalid priority. Please try again.")
                 continue
-            filtered_tasks = task_manager.filter_tasks_by_priority(priority)
-            for task in filtered_tasks:
-                print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
+            if task_manager.filter_tasks_by_priority(priority):
+                print(f"Tasks with priority '{priority}':")
+                filtered_tasks = task_manager.filter_tasks_by_priority(priority)
+                for task in filtered_tasks:
+                    print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
+                    print("----")
+            else:
+                print(f"No tasks found with priority '{priority}' in the backup.")
         elif choice == '4':
             status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
 
@@ -48,13 +56,19 @@ def start_app():
                 status = TaskStatus._status_transform(status).value
                 if task_manager.filter_tasks_by_done_status(status):
                     print(f"Tasks with done status '{status}':")
-                    for task in task_manager.filter_tasks_by_done_status(status):
+                    filtered_tasks = task_manager.filter_tasks_by_done_status(status)
+                    for task in filtered_tasks:
                         print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
                         print("----")
                 else:
                     print(f"No tasks found with done status '{status}'in the backup.")
         elif choice == '5':
             task_id = input("Enter the id of the task to mark as done: ")
+            try: 
+                task_id = int(task_id)
+            except ValueError:
+                print("Invalid task ID. Please enter a valid integer.")
+                continue
             if task_manager.get_task_by_id(task_id):
                 task_manager.finish_task(task_id)
                 print(f"Task '{task_id}' marked as done.")
@@ -73,7 +87,6 @@ def start_app():
                     new_priority = TaskPriority._priority_transform(new_priority).value
                     task_manager.change_task_priority(task_id, new_priority)
                     print(f"Task '{task_id}' priority changed to '{new_priority}'.")
-                    continue
                 else:
                     raise ValueError(f"Task with id '{task_id}' not found.")
         elif choice == '7':
@@ -93,7 +106,19 @@ def start_app():
             else:
                 raise ValueError(f"Task with id '{task_id}' not found.")
         elif choice == '8':
-            print("Goodbye!")
+            task_id = input("Enter the id of the task to delete: ")
+            try: 
+                task_id = int(task_id)
+            except ValueError:
+                print("Invalid task ID. Please enter a valid integer.")
+                continue
+            if task_manager.get_task_by_id(task_id):
+                task_manager.remove_task(task_id)
+                print(f"Task '{task_id}' deleted.")
+            else:
+                raise ValueError(f"Task with id '{task_id}' not found.")
+        elif choice == '9':
+            print("Exiting the application.")
             break
         else:
             print("Invalid option. Please try again.")
