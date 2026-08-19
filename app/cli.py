@@ -10,7 +10,7 @@ def display_menu():
     print("1. Add a new task")
     print("2. Display all tasks")
     print("3. Display tasks by priority")
-    print("4. Display tasks by done status")
+    print("4. Display tasks by status")
     print("5. Mark a task as done")
     print("6. Modify task's priority")
     print("7. Modify task's status")
@@ -40,19 +40,19 @@ def start_app():
                 continue
             filtered_tasks = task_manager.filter_tasks_by_priority(priority)
             for task in filtered_tasks:
-                print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Done: {task.done}")
+                print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
         elif choice == '4':
-            done_status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
+            status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
 
-            if TaskStatus._status_transform(done_status):
-                done_status = TaskStatus._status_transform(done_status).value
-                if task_manager.filter_tasks_by_done_status(done_status):
-                    print(f"Tasks with done status '{done_status}':")
-                    for task in task_manager.filter_tasks_by_done_status(done_status):
-                        print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Done: {task.done}")
+            if TaskStatus._status_transform(status):
+                status = TaskStatus._status_transform(status).value
+                if task_manager.filter_tasks_by_done_status(status):
+                    print(f"Tasks with done status '{status}':")
+                    for task in task_manager.filter_tasks_by_done_status(status):
+                        print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
                         print("----")
                 else:
-                    print(f"No tasks found with done status '{done_status}'in the backup.")
+                    print(f"No tasks found with done status '{status}'in the backup.")
         elif choice == '5':
             task_id = input("Enter the id of the task to mark as done: ")
             if task_manager.get_task_by_id(task_id):

@@ -28,7 +28,7 @@ class TaskManager:
             return
 
         for task in self.tasks:
-            print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Done: {task.done}")
+            print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
     
 
     def remove_task(self, task):
