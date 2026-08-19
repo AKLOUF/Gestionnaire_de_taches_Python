@@ -5,6 +5,9 @@ class TaskManager:
     def __init__(self):
         self.tasks = []
 
+    def __generate_next_id(self):
+        return max([t.id for t in self.tasks], default=0) + 1
+
     def add_task(self, title, priority, description=None):
         if title is "":
             raise ValueError("Task title cannot be empty.")
@@ -19,8 +22,14 @@ class TaskManager:
         )
         self.tasks.append(task)
 
-    def __generate_next_id(self):
-        max([t.id for t in self.tasks], default=0) + 1
+    def display_tasks(self):
+        if not self.tasks:
+            print("No tasks available.")
+            return
+
+        for task in self.tasks:
+            print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Done: {task.done}")
+    
 
     def remove_task(self, task):
         if task in self.tasks:
