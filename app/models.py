@@ -6,7 +6,7 @@ class TaskPriority(Enum):
     HIGH = "high"
 
     @staticmethod
-    def __priority_from_choice(choice):
+    def _priority_transform(choice):
         if choice == "1":
             return TaskPriority.HIGH
         elif choice == "2":
@@ -21,7 +21,8 @@ class TaskStatus(Enum):
     IN_PROGRESS = "in progress"
     DONE = "done"
 
-    def __status_from_choice(choice):
+    @staticmethod
+    def _status_transform(choice):
         if choice == "1":
             return TaskStatus.NOT_STARTED
         elif choice == "2":

@@ -24,8 +24,8 @@ def start_app():
         if choice == '1':
             title=input("Enter task title (required): ")
             priority=input("Enter task priority (3.low / 2.medium / 1.high): ")
-            if TaskPriority.__priority_from_choice(priority):
-                priority = TaskPriority.__priority_from_choice(priority).value
+            if TaskPriority._priority_transform(priority):
+                priority = TaskPriority._priority_transform(priority).value
             else:
                 print("Invalid priority choice. Please try again.")
                 continue
@@ -44,8 +44,8 @@ def start_app():
         elif choice == '4':
             done_status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
 
-            if TaskStatus.__status_from_choice(done_status):
-                done_status = TaskStatus.__status_from_choice(done_status).value
+            if TaskStatus._status_transform(done_status):
+                done_status = TaskStatus._status_transform(done_status).value
                 if task_manager.filter_tasks_by_done_status(done_status):
                     print(f"Tasks with done status '{done_status}':")
                     for task in task_manager.filter_tasks_by_done_status(done_status):
