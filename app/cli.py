@@ -1,7 +1,7 @@
 from storage import save_tasks, return_tasks 
 from manager import TaskManager
-from models import Task
-from datetime import datetime
+from models import TaskPriority
+from models import TaskStatus
 
 task_manager = TaskManager()
 
@@ -12,22 +12,25 @@ def display_menu():
     print("3. Display tasks by priority")
     print("4. Display tasks by done status")
     print("5. Mark a task as done")
-    print("6. Modify a task")
-    print("7. Delete a task")
-    print("8. Quit")
+    print("6. Modify task's priority")
+    print("7. Modify task's status")
+    print("8. Delete a task")
+    print("9. Quit")
 
 def start_app():
     while True:
         display_menu()
-        choice = input("Choose an option (1-8): ")
+        choice = input("Choose an option (1-9): ")
         if choice == '1':
-            task = Task(
-                id=None,
-                title=input("Enter task title: "),
-                creation_date=datetime.today(),
-                priority=input("Enter task priority: ")
-            )
-            task_manager.add_task(task)
+            title=input("Enter task title (required): ")
+            priority=input("Enter task priority (3.low / 2.medium / 1.high): ")
+            if TaskPriority.__priority_from_choice(priority):
+                priority = TaskPriority.__priority_from_choice(priority).value
+            else:
+                print("Invalid priority choice. Please try again.")
+                continue
+            description=input("Enter task description (optional): ")        
+            task_manager.add_task(title, priority, description)
         elif choice == '2':
             task_manager.display_tasks()
         elif choice == '3':
@@ -49,26 +52,34 @@ def start_app():
             else:
                 print("Invalid option. Please try again.")
         elif choice == '5':
-            task_title = input("Enter the title of the task to mark as done: ")
-            if task_manager.finish_task(task_title):
-                print(f"Task '{task_title}' marked as done.")
+            task_id = input("Enter the id of the task to mark as done: ")
+            if task_manager.get_task_by_id(task_id):
+                task_manager.finish_task(task_id)
+                print(f"Task '{task_id}' marked as done.")
             else:
-                print(f"Task '{task_title}' not found.")
+                raise ValueError(f"Task '{task_id}' not found.")
         elif choice == '6':
-            task_title = input("Enter the title of the task to modify: ")
-            new_title = input("Enter the new title for the task: ")
-            if task_manager.modify_task(task_title, new_title):
-                print(f"Task '{task_title}' modified successfully.")
-            else:
-                print(f"Task '{task_title}' not found.")
+            task_id = input("Enter the id of the task to modify its priority: ")
+            if task_manager.get_task_by_id(task_id):
+                new_priority = input("Enter the new priority for the task (3.low / 2.medium / 3.high): ")
+                if TaskPriority.__priority_from_choice(new_priority):
+                    new_priority = TaskPriority.__priority_from_choice(new_priority).value
+                    task_manager.change_task_priority(task_id, new_priority)
+                    print(f"Task '{task_id}' priority changed to '{new_priority}'.")
+                    continue
+                else:
+                    raise ValueError(f"Task with id '{task_id}' not found.")
         elif choice == '7':
-            task_title = input("Enter the title of the task to delete: ")
-            task = task_manager.get_task_by_title(task_title)
-            if task:
-                task_manager.remove_task(task)
-                print(f"Task '{task_title}' deleted successfully.")
+            task_id = input("Enter the id of the task to modify its status: ")
+            if task_manager.get_task_by_id(task_id):
+                new_status = input("Enter the new status for the task (3.done / 2.not started / 3.in progress): ")
+                if TaskStatus.__status_from_choice(new_status):
+                    new_status = TaskStatus.__status_from_choice(new_status).value
+                    task_manager.change_task_status(task_id, new_status)
+                    print(f"Task '{task_id}' status changed to '{new_status}'.")
+                    continue
             else:
-                print(f"Task '{task_title}' not found.")
+                raise ValueError(f"Task with id '{task_id}' not found.")
         elif choice == '8':
             print("Goodbye!")
             break
