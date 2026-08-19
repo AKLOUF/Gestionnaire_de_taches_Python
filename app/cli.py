@@ -42,15 +42,17 @@ def start_app():
             for task in filtered_tasks:
                 print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Done: {task.done}")
         elif choice == '4':
-            done_status = input("Enter the done status to filter by (done / not started / in progress): ")
-            if done_status.lower() == "done":
-                done_status = "done"
-            elif done_status.lower() == "not started":
-                done_status = "not started"
-            elif done_status.lower() == "in progress":
-                done_status = "in progress"
-            else:
-                print("Invalid option. Please try again.")
+            done_status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
+
+            if TaskStatus.__status_from_choice(done_status):
+                done_status = TaskStatus.__status_from_choice(done_status).value
+                if task_manager.filter_tasks_by_done_status(done_status):
+                    print(f"Tasks with done status '{done_status}':")
+                    for task in task_manager.filter_tasks_by_done_status(done_status):
+                        print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Done: {task.done}")
+                        print("----")
+                else:
+                    print(f"No tasks found with done status '{done_status}'in the backup.")
         elif choice == '5':
             task_id = input("Enter the id of the task to mark as done: ")
             if task_manager.get_task_by_id(task_id):
