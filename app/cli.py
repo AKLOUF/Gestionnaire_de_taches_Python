@@ -62,10 +62,15 @@ def start_app():
                 raise ValueError(f"Task '{task_id}' not found.")
         elif choice == '6':
             task_id = input("Enter the id of the task to modify its priority: ")
+            try: 
+                task_id = int(task_id)
+            except ValueError:  
+                print("Invalid task ID. Please enter a valid integer.")
+                continue
             if task_manager.get_task_by_id(task_id):
                 new_priority = input("Enter the new priority for the task (3.low / 2.medium / 3.high): ")
-                if TaskPriority.__priority_from_choice(new_priority):
-                    new_priority = TaskPriority.__priority_from_choice(new_priority).value
+                if TaskPriority._priority_transform(new_priority):
+                    new_priority = TaskPriority._priority_transform(new_priority).value
                     task_manager.change_task_priority(task_id, new_priority)
                     print(f"Task '{task_id}' priority changed to '{new_priority}'.")
                     continue
@@ -73,10 +78,15 @@ def start_app():
                     raise ValueError(f"Task with id '{task_id}' not found.")
         elif choice == '7':
             task_id = input("Enter the id of the task to modify its status: ")
+            try: 
+                task_id = int(task_id)
+            except ValueError:
+                print("Invalid task ID. Please enter a valid integer.")
+                continue
             if task_manager.get_task_by_id(task_id):
                 new_status = input("Enter the new status for the task (3.done / 2.not started / 3.in progress): ")
-                if TaskStatus.__status_from_choice(new_status):
-                    new_status = TaskStatus.__status_from_choice(new_status).value
+                if TaskStatus._status_transform(new_status):
+                    new_status = TaskStatus._status_transform(new_status).value
                     task_manager.change_task_status(task_id, new_status)
                     print(f"Task '{task_id}' status changed to '{new_status}'.")
                     continue
