@@ -67,13 +67,6 @@ class TaskManager:
     def filter_tasks_by_priority(self, priority):
         return [task for task in self.tasks if task.priority == priority]
 
-    def mark_task_as_done(self, task_id):
-        task = self.get_task_by_id(task_id)
-        if task:
-            task.mark_as_done()
-            return True
-        return False
-
     def change_task_status(self, task_id, new_status):
         task = self.get_task_by_id(task_id)
         if task:
@@ -87,11 +80,5 @@ class TaskManager:
             task.priority = new_priority
             return True
         return False
-
-    def get_task_by_title(self, task_title):
-        for task in self.tasks:
-            if task.title == task_title:
-                return task
-        return None
 
     
