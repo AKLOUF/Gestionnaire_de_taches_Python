@@ -5,7 +5,7 @@ class TaskManager:
     def __init__(self, tasks=None):
         self.tasks = tasks if tasks is not None else []
 
-    def __generate_next_id(self):
+    def _generate_next_id(self):
         return max([t.id for t in self.tasks], default=0) + 1
 
     def add_task(self, title, priority, description=None):
@@ -13,7 +13,7 @@ class TaskManager:
             raise ValueError("Task title cannot be empty.")
 
         task = Task(
-            id=self.__generate_next_id(),
+            id=self._generate_next_id(),
             title=title,
             creation_date=datetime.today().strftime("%d-%m-%Y"),
             priority=priority,
