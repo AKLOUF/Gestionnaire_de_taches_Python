@@ -64,5 +64,6 @@ class Task:
             title=data.get('title'),
             creation_date=data.get('creation_date'),
             priority=data.get('priority'),
+            description=data.get('description'),
             status=data.get('status')
         )
