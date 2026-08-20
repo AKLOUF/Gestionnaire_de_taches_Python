@@ -40,9 +40,6 @@ def start_app():
 
             if TaskPriority._priority_transform(priority):
                 priority = TaskPriority._priority_transform(priority).value
-            else:
-                print("Invalid priority. Please try again.")
-                continue
             if task_manager.filter_tasks_by_priority(priority):
                 print(f"Tasks with priority '{priority}':")
                 filtered_tasks = task_manager.filter_tasks_by_priority(priority)
@@ -89,8 +86,6 @@ def start_app():
                     new_priority = TaskPriority._priority_transform(new_priority).value
                     task_manager.change_task_priority(task_id, new_priority)
                     print(f"Task '{task_id}' priority changed to '{new_priority}'.")
-                else:
-                    raise ValueError(f"Task with id '{task_id}' not found.")
         elif choice == '7':
             task_id = input("Enter the id of the task to modify its status: ")
             try: 
@@ -105,8 +100,6 @@ def start_app():
                     task_manager.change_task_status(task_id, new_status)
                     print(f"Task '{task_id}' status changed to '{new_status}'.")
                     continue
-            else:
-                raise ValueError(f"Task with id '{task_id}' not found.")
         elif choice == '8':
             task_id = input("Enter the id of the task to delete: ")
             try: 
