@@ -37,7 +37,7 @@ def start_app():
         elif choice == '2':
             task_manager.display_tasks()
         elif choice == '3':
-            priority = input("Enter the priority to filter by (1.low / 2.medium / 3.high): ")
+            priority = input("Enter the priority to filter by (3.low / 2.medium / 1.high): ")
 
             try:
                 TaskPriority._priority_transform(priority)
@@ -91,7 +91,7 @@ def start_app():
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
             if task_manager.get_task_by_id(task_id):
-                new_priority = input("Enter the new priority for the task (3.low / 2.medium / 3.high): ")
+                new_priority = input("Enter the new priority for the task (3.low / 2.medium / 1.high): ")
                 try: 
                     TaskPriority._priority_transform(new_priority)
                     new_priority = TaskPriority._priority_transform(new_priority).value
@@ -107,7 +107,7 @@ def start_app():
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
             if task_manager.get_task_by_id(task_id):
-                new_status = input("Enter the new status for the task (3.done / 2.not started / 3.in progress): ")
+                new_status = input("Enter the new status for the task (3.done / 2.not started / 1.in progress): ")
                 try:
                     TaskStatus._status_transform(new_status)
                     new_status = TaskStatus._status_transform(new_status).value
