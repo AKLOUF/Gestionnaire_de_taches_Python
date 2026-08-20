@@ -2,7 +2,7 @@ from storage import save_tasks, return_tasks
 from manager import TaskManager
 from models import TaskPriority
 from models import TaskStatus
-from exceptions import InvalidPriorityError, InvalidStatusError
+from exceptions import InvalidPriorityError, InvalidStatusError, EmptyTitleError, TaskNotFoundError
 
 
 DATA_FILE = "../data/backup.json"
@@ -33,7 +33,11 @@ def start_app():
                 print(str(e))
                 continue
             description=input("Enter task description (optional): ")        
-            task_manager.add_task(title, priority, description)
+            try:
+                task_manager.add_task(title, priority, description)
+            except EmptyTitleError as e:
+                print(str(e))
+                continue
         elif choice == '2':
             task_manager.display_tasks()
         elif choice == '3':
@@ -75,11 +79,12 @@ def start_app():
             except ValueError:
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
-            if task_manager.get_task_by_id(task_id):
+            try:
+                task_manager.get_task_by_id(task_id)
                 task_manager.finish_task(task_id)
                 print(f"Task '{task_id}' marked as done.")
-            else:
-                print(f"Task '{task_id}' not found.")
+            except TaskNotFoundError as e:
+                print(str(e))
                 continue
         elif choice == '6':
             task_id = input("Enter the id of the task to modify its priority: ")
@@ -88,7 +93,8 @@ def start_app():
             except ValueError:  
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
-            if task_manager.get_task_by_id(task_id):
+            try:
+                task_manager.get_task_by_id(task_id)
                 new_priority = input("Enter the new priority for the task (3.low / 2.medium / 1.high): ")
                 try: 
                     new_priority = TaskPriority._priority_transform(new_priority).value
@@ -96,6 +102,9 @@ def start_app():
                     print(f"Task '{task_id}' priority changed to '{new_priority}'.")
                 except InvalidPriorityError as e:
                     print(str(e))
+            except TaskNotFoundError as e:
+                print(str(e))
+                continue
         elif choice == '7':
             task_id = input("Enter the id of the task to modify its status: ")
             try: 
@@ -103,7 +112,8 @@ def start_app():
             except ValueError:
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
-            if task_manager.get_task_by_id(task_id):
+            try:
+                task_manager.get_task_by_id(task_id)
                 new_status = input("Enter the new status for the task (3.done / 2.not started / 1.in progress): ")
                 try:
                     new_status = TaskStatus._status_transform(new_status).value
@@ -112,6 +122,9 @@ def start_app():
                     continue
                 except InvalidStatusError as e:
                     print(str(e))
+            except TaskNotFoundError as e:
+                print(str(e))
+                continue
         elif choice == '8':
             task_id = input("Enter the id of the task to delete: ")
             try: 
@@ -119,11 +132,12 @@ def start_app():
             except ValueError:
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
-            if task_manager.get_task_by_id(task_id):
+            try:
+                task_manager.get_task_by_id(task_id)
                 task_manager.remove_task(task_id)
                 print(f"Task '{task_id}' deleted.")
-            else:
-                print(f"Task with id '{task_id}' not found.")
+            except TaskNotFoundError as e:
+                print(str(e))
                 continue
         elif choice == '9':
             print("Exiting the application.")
