@@ -31,7 +31,8 @@ class TaskManager:
             print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
     
 
-    def remove_task(self, task):
+    def remove_task(self, task_id):
+        task = self.get_task_by_id(task_id)
         if task in self.tasks:
             self.tasks.remove(task)
 
