@@ -1,5 +1,7 @@
 from models import Task
 from datetime import datetime
+from exceptions import EmptyTitleError, TaskNotFoundError
+
 
 class TaskManager:
     def __init__(self, tasks=None):
@@ -10,7 +12,7 @@ class TaskManager:
 
     def add_task(self, title, priority, description=None):
         if title == "":
-            raise ValueError("Task title cannot be empty.")
+            raise EmptyTitleError("Task title cannot be empty.")
 
         task = Task(
             id=self._generate_next_id(),
@@ -43,7 +45,7 @@ class TaskManager:
         for task in self.tasks:
             if task.id == task_id:
                 return task
-        return None
+        raise TaskNotFoundError(f"Task with ID {task_id} not found.")
 
     def finish_task(self, task_id):
         task = self.get_task_by_id(task_id)

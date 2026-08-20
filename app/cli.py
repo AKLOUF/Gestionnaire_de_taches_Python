@@ -2,6 +2,8 @@ from storage import save_tasks, return_tasks
 from manager import TaskManager
 from models import TaskPriority
 from models import TaskStatus
+from exceptions import InvalidPriorityError, InvalidStatusError
+
 
 DATA_FILE = "../data/backup.json"
 
@@ -27,8 +29,8 @@ def start_app():
             priority=input("Enter task priority (3.low / 2.medium / 1.high): ")
             try:
                 priority = TaskPriority._priority_transform(priority).value
-            except ValueError:
-                print("Invalid priority choice. Please try again.")
+            except InvalidPriorityError as e:
+                print(str(e))
                 continue
             description=input("Enter task description (optional): ")        
             task_manager.add_task(title, priority, description)
@@ -38,7 +40,8 @@ def start_app():
             priority = input("Enter the priority to filter by (3.low / 2.medium / 1.high): ")
             try:
                 priority = TaskPriority._priority_transform(priority).value
-            except ValueError:
+            except InvalidPriorityError as e:
+                print(str(e))
                 print("Invalid priority choice. Please try again.")
                 continue
             if task_manager.filter_tasks_by_priority(priority):
@@ -54,8 +57,8 @@ def start_app():
 
             try: 
                 status = TaskStatus._status_transform(status).value
-            except ValueError:
-                print("Invalid done status choice. Please try again.")
+            except InvalidStatusError as e:
+                print(str(e))
                 continue
             if task_manager.filter_tasks_by_done_status(status):
                 print(f"Tasks with done status '{status}':")
@@ -91,8 +94,8 @@ def start_app():
                     new_priority = TaskPriority._priority_transform(new_priority).value
                     task_manager.change_task_priority(task_id, new_priority)
                     print(f"Task '{task_id}' priority changed to '{new_priority}'.")
-                except ValueError:
-                    print("Invalid priority choice. Please try again.")
+                except InvalidPriorityError as e:
+                    print(str(e))
         elif choice == '7':
             task_id = input("Enter the id of the task to modify its status: ")
             try: 
@@ -107,8 +110,8 @@ def start_app():
                     task_manager.change_task_status(task_id, new_status)
                     print(f"Task '{task_id}' status changed to '{new_status}'.")
                     continue
-                except ValueError:
-                    print("Invalid status choice. Please try again.")
+                except InvalidStatusError as e:
+                    print(str(e))
         elif choice == '8':
             task_id = input("Enter the id of the task to delete: ")
             try: 

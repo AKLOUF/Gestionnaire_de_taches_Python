@@ -1,5 +1,7 @@
 from enum import Enum
 
+from exceptions import InvalidPriorityError, InvalidStatusError
+
 class TaskPriority(Enum):
     LOW = "low"
     MEDIUM = "medium"
@@ -14,7 +16,7 @@ class TaskPriority(Enum):
         elif choice == "3":
             return TaskPriority.LOW
         else:
-            raise ValueError("Invalid priority choice. Please choose 1, 2, or 3.")
+            raise InvalidPriorityError("Invalid priority choice. Please choose 1, 2, or 3.")
 
 class TaskStatus(Enum):
     NOT_STARTED = "not started"
@@ -30,7 +32,7 @@ class TaskStatus(Enum):
         elif choice == "3":
             return TaskStatus.DONE
         else:
-            raise ValueError("Invalid status choice. Please choose 1, 2, or 3.")
+            raise InvalidStatusError("Invalid status choice. Please choose 1, 2, or 3.")
 
 
 class Task:
