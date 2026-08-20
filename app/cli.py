@@ -26,7 +26,6 @@ def start_app():
             title=input("Enter task title (required): ")
             priority=input("Enter task priority (3.low / 2.medium / 1.high): ")
             try:
-                TaskPriority._priority_transform(priority)
                 priority = TaskPriority._priority_transform(priority).value
             except ValueError:
                 print("Invalid priority choice. Please try again.")
