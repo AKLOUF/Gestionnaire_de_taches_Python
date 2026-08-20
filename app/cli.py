@@ -26,9 +26,10 @@ def start_app():
         if choice == '1':
             title=input("Enter task title (required): ")
             priority=input("Enter task priority (3.low / 2.medium / 1.high): ")
-            if TaskPriority._priority_transform(priority):
+            try:
+                TaskPriority._priority_transform(priority)
                 priority = TaskPriority._priority_transform(priority).value
-            else:
+            except ValueError:
                 print("Invalid priority choice. Please try again.")
                 continue
             description=input("Enter task description (optional): ")        
@@ -38,8 +39,12 @@ def start_app():
         elif choice == '3':
             priority = input("Enter the priority to filter by (1.low / 2.medium / 3.high): ")
 
-            if TaskPriority._priority_transform(priority):
+            try:
+                TaskPriority._priority_transform(priority)
                 priority = TaskPriority._priority_transform(priority).value
+            except ValueError:
+                print("Invalid priority choice. Please try again.")
+                continue
             if task_manager.filter_tasks_by_priority(priority):
                 print(f"Tasks with priority '{priority}':")
                 filtered_tasks = task_manager.filter_tasks_by_priority(priority)
@@ -51,16 +56,20 @@ def start_app():
         elif choice == '4':
             status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
 
-            if TaskStatus._status_transform(status):
+            try: 
+                TaskStatus._status_transform(status)
                 status = TaskStatus._status_transform(status).value
-                if task_manager.filter_tasks_by_done_status(status):
-                    print(f"Tasks with done status '{status}':")
-                    filtered_tasks = task_manager.filter_tasks_by_done_status(status)
-                    for task in filtered_tasks:
-                        print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
-                        print("----")
-                else:
-                    print(f"No tasks found with done status '{status}'in the backup.")
+            except ValueError:
+                print("Invalid done status choice. Please try again.")
+                continue
+            if task_manager.filter_tasks_by_done_status(status):
+                print(f"Tasks with done status '{status}':")
+                filtered_tasks = task_manager.filter_tasks_by_done_status(status)
+                for task in filtered_tasks:
+                    print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
+                    print("----")
+            else:
+                print(f"No tasks found with done status '{status}'in the backup.")
         elif choice == '5':
             task_id = input("Enter the id of the task to mark as done: ")
             try: 
