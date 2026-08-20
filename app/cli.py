@@ -119,7 +119,6 @@ def start_app():
                     new_status = TaskStatus._status_transform(new_status).value
                     task_manager.change_task_status(task_id, new_status)
                     print(f"Task '{task_id}' status changed to '{new_status}'.")
-                    continue
                 except InvalidStatusError as e:
                     print(str(e))
             except TaskNotFoundError as e:
