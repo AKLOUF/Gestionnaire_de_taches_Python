@@ -4,7 +4,7 @@ from models import TaskPriority
 from models import TaskStatus
 from storage import save_tasks, return_tasks
 
-
+DATA_FILE = "../data/backup.json"
 
 def display_menu():
     print("=== Gestionnaire de tâches ===")
@@ -19,7 +19,7 @@ def display_menu():
     print("9. Quit")
 
 def start_app():
-    task_manager = TaskManager(return_tasks("../data/backup.json"))
+    task_manager = TaskManager(return_tasks(DATA_FILE))
     while True:
         display_menu()
         choice = input("Choose an option (1-9): ")
@@ -121,6 +121,7 @@ def start_app():
                 raise ValueError(f"Task with id '{task_id}' not found.")
         elif choice == '9':
             print("Exiting the application.")
+            save_tasks(task_manager.get_tasks(), DATA_FILE)
             break
         else:
             print("Invalid option. Please try again.")
