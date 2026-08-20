@@ -37,9 +37,7 @@ def start_app():
             task_manager.display_tasks()
         elif choice == '3':
             priority = input("Enter the priority to filter by (3.low / 2.medium / 1.high): ")
-
             try:
-                TaskPriority._priority_transform(priority)
                 priority = TaskPriority._priority_transform(priority).value
             except ValueError:
                 print("Invalid priority choice. Please try again.")
@@ -56,7 +54,6 @@ def start_app():
             status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
 
             try: 
-                TaskStatus._status_transform(status)
                 status = TaskStatus._status_transform(status).value
             except ValueError:
                 print("Invalid done status choice. Please try again.")
@@ -92,7 +89,6 @@ def start_app():
             if task_manager.get_task_by_id(task_id):
                 new_priority = input("Enter the new priority for the task (3.low / 2.medium / 1.high): ")
                 try: 
-                    TaskPriority._priority_transform(new_priority)
                     new_priority = TaskPriority._priority_transform(new_priority).value
                     task_manager.change_task_priority(task_id, new_priority)
                     print(f"Task '{task_id}' priority changed to '{new_priority}'.")
@@ -108,7 +104,6 @@ def start_app():
             if task_manager.get_task_by_id(task_id):
                 new_status = input("Enter the new status for the task (3.done / 2.not started / 1.in progress): ")
                 try:
-                    TaskStatus._status_transform(new_status)
                     new_status = TaskStatus._status_transform(new_status).value
                     task_manager.change_task_status(task_id, new_status)
                     print(f"Task '{task_id}' status changed to '{new_status}'.")
