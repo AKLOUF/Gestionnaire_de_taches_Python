@@ -37,7 +37,6 @@ def start_app():
                 task_manager.add_task(title, priority, description)
             except EmptyTitleError as e:
                 print(str(e))
-                continue
         elif choice == '2':
             task_manager.display_tasks()
         elif choice == '3':
@@ -85,7 +84,6 @@ def start_app():
                 print(f"Task '{task_id}' marked as done.")
             except TaskNotFoundError as e:
                 print(str(e))
-                continue
         elif choice == '6':
             task_id = input("Enter the id of the task to modify its priority: ")
             try: 
@@ -104,7 +102,6 @@ def start_app():
                     print(str(e))
             except TaskNotFoundError as e:
                 print(str(e))
-                continue
         elif choice == '7':
             task_id = input("Enter the id of the task to modify its status: ")
             try: 
@@ -123,7 +120,6 @@ def start_app():
                     print(str(e))
             except TaskNotFoundError as e:
                 print(str(e))
-                continue
         elif choice == '8':
             task_id = input("Enter the id of the task to delete: ")
             try: 
@@ -137,7 +133,6 @@ def start_app():
                 print(f"Task '{task_id}' deleted.")
             except TaskNotFoundError as e:
                 print(str(e))
-                continue
         elif choice == '9':
             print("Exiting the application.")
             save_tasks(task_manager.get_tasks(), DATA_FILE)
