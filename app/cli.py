@@ -2,7 +2,6 @@ from storage import save_tasks, return_tasks
 from manager import TaskManager
 from models import TaskPriority
 from models import TaskStatus
-from storage import save_tasks, return_tasks
 
 DATA_FILE = "../data/backup.json"
 
