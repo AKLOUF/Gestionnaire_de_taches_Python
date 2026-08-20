@@ -81,7 +81,8 @@ def start_app():
                 task_manager.finish_task(task_id)
                 print(f"Task '{task_id}' marked as done.")
             else:
-                raise ValueError(f"Task '{task_id}' not found.")
+                print(f"Task '{task_id}' not found.")
+                continue
         elif choice == '6':
             task_id = input("Enter the id of the task to modify its priority: ")
             try: 
@@ -126,7 +127,8 @@ def start_app():
                 task_manager.remove_task(task_id)
                 print(f"Task '{task_id}' deleted.")
             else:
-                raise ValueError(f"Task with id '{task_id}' not found.")
+                print(f"Task with id '{task_id}' not found.")
+                continue
         elif choice == '9':
             print("Exiting the application.")
             save_tasks(task_manager.get_tasks(), DATA_FILE)
