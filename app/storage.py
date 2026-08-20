@@ -1,5 +1,4 @@
 import json
-from turtle import done
 from app.models import Task 
 
 def save_tasks(tasks, filename):
@@ -20,10 +19,11 @@ def return_tasks(filename):
         with open(filename, 'r') as file:
             data = json.load(file)
             for task_data in data:
-                task = Task.from_dict(task_data)
-                tasks.append(task)
-                task.done = done == 'True'
-                tasks.append(task)
+                try:
+                    task = Task.from_dict(task_data)
+                    tasks.append(task)
+                except Exception as e:
+                    print(f"Error creating task from data {task_data}: {e}")
     except FileNotFoundError:
         print(f"File {filename} not found. Returning an empty task list.")
     except json.JSONDecodeError:

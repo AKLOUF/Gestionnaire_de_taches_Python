@@ -2,8 +2,9 @@ from storage import save_tasks, return_tasks
 from manager import TaskManager
 from models import TaskPriority
 from models import TaskStatus
+from storage import save_tasks, return_tasks
 
-task_manager = TaskManager()
+
 
 def display_menu():
     print("=== Gestionnaire de tâches ===")
@@ -18,6 +19,7 @@ def display_menu():
     print("9. Quit")
 
 def start_app():
+    task_manager = TaskManager(return_tasks("../data/backup.json"))
     while True:
         display_menu()
         choice = input("Choose an option (1-9): ")

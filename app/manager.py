@@ -2,8 +2,8 @@ from models import Task
 from datetime import datetime
 
 class TaskManager:
-    def __init__(self):
-        self.tasks = []
+    def __init__(self, tasks=None):
+        self.tasks = tasks if tasks is not None else []
 
     def __generate_next_id(self):
         return max([t.id for t in self.tasks], default=0) + 1
