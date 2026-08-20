@@ -54,6 +54,7 @@ class Task:
             'title': self.title,
             'creation_date': self.creation_date,
             'priority': self.priority,
+            'description': self.description,
             'status': self.status
         }
 
