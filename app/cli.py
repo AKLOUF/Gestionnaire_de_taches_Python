@@ -91,10 +91,13 @@ def start_app():
                 continue
             if task_manager.get_task_by_id(task_id):
                 new_priority = input("Enter the new priority for the task (3.low / 2.medium / 3.high): ")
-                if TaskPriority._priority_transform(new_priority):
+                try: 
+                    TaskPriority._priority_transform(new_priority)
                     new_priority = TaskPriority._priority_transform(new_priority).value
                     task_manager.change_task_priority(task_id, new_priority)
                     print(f"Task '{task_id}' priority changed to '{new_priority}'.")
+                except ValueError:
+                    print("Invalid priority choice. Please try again.")
         elif choice == '7':
             task_id = input("Enter the id of the task to modify its status: ")
             try: 
@@ -104,11 +107,14 @@ def start_app():
                 continue
             if task_manager.get_task_by_id(task_id):
                 new_status = input("Enter the new status for the task (3.done / 2.not started / 3.in progress): ")
-                if TaskStatus._status_transform(new_status):
+                try:
+                    TaskStatus._status_transform(new_status)
                     new_status = TaskStatus._status_transform(new_status).value
                     task_manager.change_task_status(task_id, new_status)
                     print(f"Task '{task_id}' status changed to '{new_status}'.")
                     continue
+                except ValueError:
+                    print("Invalid status choice. Please try again.")
         elif choice == '8':
             task_id = input("Enter the id of the task to delete: ")
             try: 
