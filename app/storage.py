@@ -24,10 +24,6 @@ def return_tasks(filename):
                     tasks.append(task)
                 except Exception as e:
                     print(f"Error creating task from data {task_data}: {e}")
-    except FileNotFoundError:
-        print(f"File {filename} not found. Returning an empty task list.")
-    except json.JSONDecodeError:
-        print(f"Error decoding JSON from {filename}. Returning an empty task list.")
     except Exception as e:
         print(f"An error occurred while reading {filename}: {e}. Returning an empty task list.")
     return tasks
