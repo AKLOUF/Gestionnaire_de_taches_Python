@@ -1,5 +1,7 @@
 import pytest
 from models import Task, TaskStatus, TaskPriority
+from exceptions import InvalidPriorityError, InvalidStatusError
+
 
 id = 0
 title = "Test Task"
@@ -60,12 +62,12 @@ def test_priority_transform():
     assert TaskPriority._priority_transform("1") == TaskPriority.HIGH
     assert TaskPriority._priority_transform("2") == TaskPriority.MEDIUM
     assert TaskPriority._priority_transform("3") == TaskPriority.LOW
-    with pytest.raises(Exception):
+    with pytest.raises(InvalidPriorityError):
         TaskPriority._priority_transform("invalid")
 
 def test_status_transform():
     assert TaskStatus._status_transform("1") == TaskStatus.NOT_STARTED
     assert TaskStatus._status_transform("2") == TaskStatus.IN_PROGRESS
     assert TaskStatus._status_transform("3") == TaskStatus.DONE
-    with pytest.raises(Exception):
+    with pytest.raises(InvalidStatusError):
         TaskStatus._status_transform("invalid")
