@@ -37,8 +37,10 @@ def start_app():
                 task_manager.add_task(title, priority, description)
             except EmptyTitleError as e:
                 print(str(e))
+            print("============Task added successfully.============\n\n")
         elif choice == '2':
             task_manager.display_tasks()
+            print("========================\n\n")
         elif choice == '3':
             priority = input("Enter the priority to filter by (3.low / 2.medium / 1.high): ")
             try:
@@ -55,6 +57,7 @@ def start_app():
                     print("----")
             else:
                 print(f"No tasks found with priority '{priority}' in the backup.")
+            print("========================\n\n")
         elif choice == '4':
             status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
 
@@ -71,6 +74,7 @@ def start_app():
                     print("----")
             else:
                 print(f"No tasks found with done status '{status}'in the backup.")
+            print("========================\n\n")
         elif choice == '5':
             task_id = input("Enter the id of the task to mark as done: ")
             try: 
@@ -84,6 +88,7 @@ def start_app():
                 print(f"Task '{task_id}' marked as done.")
             except TaskNotFoundError as e:
                 print(str(e))
+            print("========================\n\n")
         elif choice == '6':
             task_id = input("Enter the id of the task to modify its priority: ")
             try: 
@@ -102,6 +107,7 @@ def start_app():
                     print(str(e))
             except TaskNotFoundError as e:
                 print(str(e))
+            print("========================\n\n")
         elif choice == '7':
             task_id = input("Enter the id of the task to modify its status: ")
             try: 
@@ -120,6 +126,7 @@ def start_app():
                     print(str(e))
             except TaskNotFoundError as e:
                 print(str(e))
+            print("========================\n\n")
         elif choice == '8':
             task_id = input("Enter the id of the task to delete: ")
             try: 
@@ -133,6 +140,7 @@ def start_app():
                 print(f"Task '{task_id}' deleted.")
             except TaskNotFoundError as e:
                 print(str(e))
+            print("========================\n\n")
         elif choice == '9':
             print("Exiting the application.")
             save_tasks(task_manager.get_tasks(), DATA_FILE)

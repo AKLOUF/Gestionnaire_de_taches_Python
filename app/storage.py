@@ -1,10 +1,10 @@
 import json
-from app.models import Task 
+from models import Task 
 
 def save_tasks(tasks, filename):
     try:
         with open(filename, 'w') as file:
-            json.dump([task.to_dict() for task in tasks], file)
+            json.dump([task.to_dict() for task in tasks], file, indent=4)
     except FileNotFoundError:
         print(f"File {filename} not found. Returning an empty task list.")
     except json.JSONDecodeError:
