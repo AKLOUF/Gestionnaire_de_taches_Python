@@ -9,7 +9,14 @@ description = "This is a test task."
 status = TaskStatus.NOT_STARTED.value
 new_title = "Modified Task Title"
 
-
+def test_task_initialization():
+    task = Task(id, title, creation_date, priority, description, status)
+    assert task.id == id
+    assert task.title == title
+    assert task.creation_date == creation_date
+    assert task.priority == priority
+    assert task.description == description
+    assert task.status == status
 
 def test_mark_task_as_done():
     task = Task(id, title, creation_date, priority, description, status)
@@ -49,4 +56,16 @@ def test_task_from_dict():
     assert new_task.description == description
     assert new_task.status == status
 
+def test_priority_transform():
+    assert TaskPriority._priority_transform("1") == TaskPriority.HIGH
+    assert TaskPriority._priority_transform("2") == TaskPriority.MEDIUM
+    assert TaskPriority._priority_transform("3") == TaskPriority.LOW
+    with pytest.raises(Exception):
+        TaskPriority._priority_transform("invalid")
 
+def test_status_transform():
+    assert TaskStatus._status_transform("1") == TaskStatus.NOT_STARTED
+    assert TaskStatus._status_transform("2") == TaskStatus.IN_PROGRESS
+    assert TaskStatus._status_transform("3") == TaskStatus.DONE
+    with pytest.raises(Exception):
+        TaskStatus._status_transform("invalid")
