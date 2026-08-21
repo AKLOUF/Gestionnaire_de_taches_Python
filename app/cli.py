@@ -83,7 +83,6 @@ def start_app():
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
             try:
-                task_manager.get_task_by_id(task_id)
                 task_manager.finish_task(task_id)
                 print(f"Task '{task_id}' marked as done.")
             except TaskNotFoundError as e:
@@ -97,7 +96,6 @@ def start_app():
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
             try:
-                task_manager.get_task_by_id(task_id)
                 new_title = input("Enter the new title: ")
                 task_manager.modify_task_title(task_id, new_title)
                 print(f"Task '{task_id}' has new title.")
@@ -113,14 +111,12 @@ def start_app():
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
             try:
-                task_manager.get_task_by_id(task_id)
                 new_priority = input("Enter the new priority for the task (3.low / 2.medium / 1.high): ")
-                try: 
-                    new_priority = TaskPriority._priority_transform(new_priority).value
-                    task_manager.change_task_priority(task_id, new_priority)
-                    print(f"Task '{task_id}' priority changed to '{new_priority}'.")
-                except InvalidPriorityError as e:
-                    print(str(e))
+                new_priority = TaskPriority._priority_transform(new_priority).value
+                task_manager.change_task_priority(task_id, new_priority)
+                print(f"Task '{task_id}' priority changed to '{new_priority}'.")
+            except InvalidPriorityError as e:
+                print(str(e))
             except TaskNotFoundError as e:
                 print(str(e))
             print("========================\n\n")
@@ -132,14 +128,12 @@ def start_app():
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
             try:
-                task_manager.get_task_by_id(task_id)
                 new_status = input("Enter the new status for the task (3.done / 2.in progress / 1.not started): ")
-                try:
-                    new_status = TaskStatus._status_transform(new_status).value
-                    task_manager.change_task_status(task_id, new_status)
-                    print(f"Task '{task_id}' status changed to '{new_status}'.")
-                except InvalidStatusError as e:
-                    print(str(e))
+                new_status = TaskStatus._status_transform(new_status).value
+                task_manager.change_task_status(task_id, new_status)
+                print(f"Task '{task_id}' status changed to '{new_status}'.")
+            except InvalidStatusError as e:
+                print(str(e))
             except TaskNotFoundError as e:
                 print(str(e))
             print("========================\n\n")
@@ -151,7 +145,6 @@ def start_app():
                 print("Invalid task ID. Please enter a valid integer.")
                 continue
             try:
-                task_manager.get_task_by_id(task_id)
                 task_manager.remove_task(task_id)
                 print(f"Task '{task_id}' deleted.")
             except TaskNotFoundError as e:
