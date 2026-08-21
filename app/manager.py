@@ -54,13 +54,6 @@ class TaskManager:
             return True
         return False
 
-    def modify_task(self, task_id, new_title):
-        task = self.get_task_by_id(task_id)
-        if task:
-            task.modify_title(new_title)
-            return True
-        return False
-
     def filter_tasks_by_done_status(self, status):
         if status is None:
             return self.tasks
