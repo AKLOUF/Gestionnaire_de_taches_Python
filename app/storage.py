@@ -6,7 +6,7 @@ def save_tasks(tasks, filename):
         with open(filename, 'w') as file:
             json.dump([task.to_dict() for task in tasks], file, indent=4)
     except FileNotFoundError:
-        print(f"File {filename} not found. Returning an empty task list.")
+        print(f"Could not save tasks: the folder for {filename} does not exist.")
         return False
     except Exception as e:
         print(f"An error occurred while saving to {filename}: {e}.")
