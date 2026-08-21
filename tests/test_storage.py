@@ -39,8 +39,8 @@ def test_return_tasks(tmp_path):
     assert return_task[0].description == description
     assert return_task[0].creation_date == datetime.today().strftime("%d-%m-%Y")
     assert return_task[0].status == TaskStatus.NOT_STARTED.value
-    assert save_tasks([], str(data_file)) == None
-    assert save_tasks([], "unexistant_folder/backup.json") == None
+    assert save_tasks([], str(data_file)) == True
+    assert save_tasks([], "unexistant_folder/backup.json") == False
 
 
 def test_return_tasks_unexistant_file():
