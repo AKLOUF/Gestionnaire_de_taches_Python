@@ -45,7 +45,7 @@ class Task:
         self.status = status
 
     def mark_as_done(self):
-        self.status = "done"
+        self.status = TaskStatus.DONE.value
 
     def modify_title(self, new_title):
         self.title = new_title
