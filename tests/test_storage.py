@@ -25,8 +25,7 @@ def test_save_tasks(tmp_path):
     assert saved_data[0]['priority'] == priority
     assert saved_data[0]['description'] == description
     assert saved_data[0]['status'] == TaskStatus.NOT_STARTED.value
-    assert save_tasks([], str(data_file)) == True
-    assert save_tasks([], "unexistant_folder/backup.json") == False
+    assert saved_data[1]['title'] == "Another Task"
 
 def test_return_tasks(tmp_path):
     data_file = tmp_path / "test_backup.json"
@@ -58,3 +57,10 @@ def test_return_tasks_invalid_json(tmp_path):
     return_data = return_tasks(str(data_file))
 
     assert return_data == []
+
+def test_save_tasks_empty_list(tmp_path):
+    data_file = tmp_path / "test_backup.json"
+    assert save_tasks([], str(data_file)) == True
+
+def test_save_tasks_invalid_path():
+    assert save_tasks([], "unexistant_folder/backup.json") == False
