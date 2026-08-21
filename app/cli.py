@@ -23,7 +23,7 @@ def start_app():
     task_manager = TaskManager(return_tasks(DATA_FILE))
     while True:
         display_menu()
-        choice = input("Choose an option (1-9): ")
+        choice = input("Choose an option (1-10): ")
         if choice == '1':
             title=input("Enter task title (required): ")
             priority=input("Enter task priority (3.low / 2.medium / 1.high): ")
