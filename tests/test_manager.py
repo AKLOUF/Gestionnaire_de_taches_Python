@@ -30,6 +30,8 @@ def test_generate_next_id():
     assert task_manager._generate_next_id() == 1
     task_manager.add_task(title, priority, description)
     assert task_manager._generate_next_id() == 2
+    task_manager.remove_task(1)
+    assert task_manager._generate_next_id() == 1
 
 def test_get_tasks():
     task_manager = TaskManager()
