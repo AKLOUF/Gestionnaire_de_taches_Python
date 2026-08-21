@@ -7,10 +7,11 @@ def save_tasks(tasks, filename):
             json.dump([task.to_dict() for task in tasks], file, indent=4)
     except FileNotFoundError:
         print(f"File {filename} not found. Returning an empty task list.")
-    except json.JSONDecodeError:
-        print(f"Error decoding JSON from {filename}. Returning an empty task list.")
+        return False
     except Exception as e:
-        print(f"An error occurred while reading {filename}: {e}. Returning an empty task list.")
+        print(f"An error occurred while saving to {filename}: {e}.")
+        return False
+    return True
 
 def return_tasks(filename):
     tasks = []
