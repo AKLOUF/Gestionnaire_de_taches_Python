@@ -11,7 +11,6 @@ def save_tasks(tasks, filename):
         print(f"Error decoding JSON from {filename}. Returning an empty task list.")
     except Exception as e:
         print(f"An error occurred while reading {filename}: {e}. Returning an empty task list.")
-    return 0
 
 def return_tasks(filename):
     tasks = []
