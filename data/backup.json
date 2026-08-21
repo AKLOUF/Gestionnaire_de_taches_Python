@@ -1,28 +1,26 @@
-{
-    "tasks": [
-        {
-            "id": 1,
-            "title": "Finish project report",
-            "description": "Complete the final report for the project and submit it to the manager.",
-            "creation_date": "2024-06-15",
-            "priority": "High",
-            "status": "In Progress"
-        },
-        {
-            "id": 2,
-            "title": "Prepare presentation slides",
-            "description": "Create slides for the upcoming team meeting.",
-            "creation_date": "2024-06-20",
-            "priority": "Medium",
-            "status": "Not Started"
-        },
-        {
-            "id": 3,
-            "title": "Update project documentation",
-            "description": "Revise and update the project documentation to reflect recent changes.",
-            "creation_date": "2024-06-22",
-            "priority": "Low",
-            "status": "done"
-        }
-    ]
-}
+[
+    {
+        "id": 1,
+        "title": "Learning python",
+        "creation_date": "21-08-2026",
+        "priority": "high",
+        "description": "",
+        "status": "not started"
+    },
+    {
+        "id": 2,
+        "title": "Learninig ML",
+        "creation_date": "21-08-2026",
+        "priority": "high",
+        "description": "",
+        "status": "not started"
+    },
+    {
+        "id": 3,
+        "title": "Learning LLM",
+        "creation_date": "21-08-2026",
+        "priority": "medium",
+        "description": "Learning how LLMs are made.",
+        "status": "not started"
+    }
+]
