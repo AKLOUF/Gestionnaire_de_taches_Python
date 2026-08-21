@@ -33,7 +33,6 @@ def test_task_to_dict():
     assert task_dict['status'] == status
 
 def test_task_from_dict():
-    task = Task(id, title, creation_date, priority, description, status)
     task_data = {
         'id': id,
         'title': title,
