@@ -105,7 +105,7 @@ def start_app():
                 print(str(e))
             print("========================\n\n")
 
-        elif choice == '6':
+        elif choice == '7':
             task_id = input("Enter the id of the task to modify its priority: ")
             try: 
                 task_id = int(task_id)
@@ -124,7 +124,7 @@ def start_app():
             except TaskNotFoundError as e:
                 print(str(e))
             print("========================\n\n")
-        elif choice == '7':
+        elif choice == '8':
             task_id = input("Enter the id of the task to modify its status: ")
             try: 
                 task_id = int(task_id)
@@ -143,7 +143,7 @@ def start_app():
             except TaskNotFoundError as e:
                 print(str(e))
             print("========================\n\n")
-        elif choice == '8':
+        elif choice == '9':
             task_id = input("Enter the id of the task to delete: ")
             try: 
                 task_id = int(task_id)
@@ -157,7 +157,7 @@ def start_app():
             except TaskNotFoundError as e:
                 print(str(e))
             print("========================\n\n")
-        elif choice == '9':
+        elif choice == '10':
             print("Exiting the application.")
             save_tasks(task_manager.get_tasks(), DATA_FILE)
             break
