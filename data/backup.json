@@ -5,22 +5,14 @@
         "creation_date": "21-08-2026",
         "priority": "high",
         "description": "",
-        "status": "not started"
+        "status": "done"
     },
     {
         "id": 2,
         "title": "Learninig ML",
         "creation_date": "21-08-2026",
-        "priority": "high",
-        "description": "",
-        "status": "not started"
-    },
-    {
-        "id": 3,
-        "title": "Learning LLM",
-        "creation_date": "21-08-2026",
         "priority": "medium",
-        "description": "Learning how LLMs are made.",
+        "description": "",
         "status": "not started"
     }
 ]

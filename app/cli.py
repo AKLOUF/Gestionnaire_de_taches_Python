@@ -59,7 +59,7 @@ def start_app():
                 print(f"No tasks found with priority '{priority}' in the backup.")
             print("========================\n\n")
         elif choice == '4':
-            status = input("Enter the done status to filter by (3.done / 2.not started / 1.in progress): ")
+            status = input("Enter the done status to filter by (3.done / 2.in progress / 1.not started): ")
 
             try: 
                 status = TaskStatus._status_transform(status).value
@@ -73,7 +73,7 @@ def start_app():
                     print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
                     print("----")
             else:
-                print(f"No tasks found with done status '{status}'in the backup.")
+                print(f"No tasks found with done status '{status}' in the backup.")
             print("========================\n\n")
         elif choice == '5':
             task_id = input("Enter the id of the task to mark as done: ")
@@ -117,7 +117,7 @@ def start_app():
                 continue
             try:
                 task_manager.get_task_by_id(task_id)
-                new_status = input("Enter the new status for the task (3.done / 2.not started / 1.in progress): ")
+                new_status = input("Enter the new status for the task (3.done / 2.in progress / 1.not started): ")
                 try:
                     new_status = TaskStatus._status_transform(new_status).value
                     task_manager.change_task_status(task_id, new_status)
