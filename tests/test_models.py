@@ -34,7 +34,15 @@ def test_task_to_dict():
 
 def test_task_from_dict():
     task = Task(id, title, creation_date, priority, description, status)
-    new_task = Task.from_dict(task.to_dict())
+    task_data = {
+        'id': id,
+        'title': title,
+        'creation_date': creation_date,
+        'priority': priority,
+        'description': description,
+        'status': status
+    }
+    new_task = Task.from_dict(task_data)
     assert new_task.id == id
     assert new_task.title == title
     assert new_task.creation_date == creation_date
