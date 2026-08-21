@@ -32,7 +32,13 @@ class TaskManager:
         for task in self.tasks:
             print(f"ID: {task.id}, Title: {task.title}, Priority: {task.priority}, Status: {task.status}")
     
-
+    def modify_task_title(self, task_id, new_title):
+        task = self.get_task_by_id(task_id)
+        if task:
+            task.modify_title(new_title)
+            return True
+        return False
+        
     def remove_task(self, task_id):
         task = self.get_task_by_id(task_id)
         if task in self.tasks:

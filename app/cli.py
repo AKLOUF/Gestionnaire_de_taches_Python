@@ -14,10 +14,11 @@ def display_menu():
     print("3. Display tasks by priority")
     print("4. Display tasks by status")
     print("5. Mark a task as done")
-    print("6. Modify task's priority")
-    print("7. Modify task's status")
-    print("8. Delete a task")
-    print("9. Quit")
+    print("6. Modify task's title")
+    print("7. Modify task's priority")
+    print("8. Modify task's status")
+    print("9. Delete a task")
+    print("10. Quit")
 
 def start_app():
     task_manager = TaskManager(return_tasks(DATA_FILE))
@@ -89,6 +90,22 @@ def start_app():
             except TaskNotFoundError as e:
                 print(str(e))
             print("========================\n\n")
+        elif choice == '6':
+            task_id = input("Enter the id of the task to change the title: ")
+            try: 
+                task_id = int(task_id)
+            except ValueError:
+                print("Invalid task ID. Please enter a valid integer.")
+                continue
+            try:
+                task_manager.get_task_by_id(task_id)
+                new_title = input("Enter the new title: ")
+                task_manager.modify_task_title(task_id, new_title)
+                print(f"Task '{task_id}' has new title.")
+            except TaskNotFoundError as e:
+                print(str(e))
+            print("========================\n\n")
+
         elif choice == '6':
             task_id = input("Enter the id of the task to modify its priority: ")
             try: 
